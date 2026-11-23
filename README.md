@@ -1,14 +1,18 @@
 # Sample Hardhat Project: DeFi for Staking and Lending
 
 # Link to vercel deployed frontend
+https://defi-for-staking-and-lending.vercel.app
 
 # Link to github repo
+https://github.com/Barry-White17/defi-for-staking-and-lending
 
 ### Info
 
-- Note should be taken that the project's UI is just wireframe now, to showcase a working architecture.
-
-- A production build is to be made with ShadcnUI and TailwindCss
+* Should be noted that;
+* 
+-  The project's UI is just wireframe now, to showcase a working architecture.
+-  The project is self-initiated to showcase competence
+- A production build for ui is to be made with ShadcnUI and TailwindCss
 
 ## How to use the project
 
