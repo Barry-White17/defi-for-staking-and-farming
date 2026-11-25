@@ -1,7 +1,7 @@
-# Sample Hardhat Project: DeFi for Staking and Lending
+# Sample Hardhat Project: DeFi for Staking and Farming
 
 # Link to vercel deployed frontend
-https://defi-for-staking-and-lending.vercel.app
+https://defi-for-staking-and-farming.vercel.app
 
 # Link to github repo
 https://github.com/Barry-White17/defi-for-staking-and-lending
