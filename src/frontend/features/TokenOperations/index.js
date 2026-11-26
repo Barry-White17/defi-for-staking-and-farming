@@ -59,8 +59,8 @@ const TokenOperations = () => {
     try {
       const contract = new ethers.Contract(TokenAddress.address, TokenABI.abi, library.getSigner());
       const tx = autoBurn ?
-        await contract.transferWithAutoBurn(address, ethers.utils.parseUnits(amount, 'ether')) :
-        await contract.transfer(address, ethers.utils.parseUnits(amount, 'ether'));
+        await contract.transferWithAutoBurn(address, ethers.parseUnits(amount, 'ether')) :
+        await contract.transfer(address, ethers.parseUnits(amount, 'ether'));
       toast.info(`Transaction Submitted! TxHash: ${tx.hash}`);
       await tx.wait();
       toast.info(`Transaction Succeeded! TxHash: ${tx.hash}`);
