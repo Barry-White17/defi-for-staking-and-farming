@@ -37,7 +37,7 @@ const SupplyFarmingReward = () => {
     try {
       const tokenContract = new ethers.Contract(rewardToken.address, ERC20ABI, library.getSigner());
       const _balance = await tokenContract.balanceOf(account);
-      setBalance(Number(ethers.utils.formatUnits(_balance, rewardToken.decimals)));
+      setBalance(Number(ethers.formatUnits(_balance, rewardToken.decimals)));
     } catch (error) {
       toast.error('Cannot get balance for reward token!');
       console.error(error);
@@ -58,7 +58,7 @@ const SupplyFarmingReward = () => {
     setLoading(true);
     try {
       const tokenContract = new ethers.Contract(rewardToken.address, ERC20ABI, library.getSigner());
-      const tx = await tokenContract.transfer(farmingPoolAddress, ethers.utils.parseUnits(toString(amount), rewardToken.decimals));
+      const tx = await tokenContract.transfer(farmingPoolAddress, ethers.parseUnits(toString(amount), rewardToken.decimals));
       await tx.wait();
       toast.info(`Successfully transferred reward token to farming pool! Transaction Hash: ${tx.hash}`);
       setAmount(0);
