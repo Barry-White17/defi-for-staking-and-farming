@@ -58,12 +58,12 @@ const ListLiquidity = () => {
     setExpanded(isExpanded ? pair.pairAddress : false);
     let lpToken = new ethers.Contract(pair.pairAddress, TokenPairABI, localProvider);
     let totalSupply = await lpToken.totalSupply();
-    let shareRatio = pair.balance / Number(ethers.utils.formatUnits(totalSupply, 18));
+    let shareRatio = pair.balance / Number(ethers.formatUnits(totalSupply, 18));
     setSharePercent(100 * shareRatio);
 
     let [_reserveA, _reserveB,] = await lpToken.getReserves();
-    setPooledTokenA(Number(ethers.utils.formatUnits(_reserveA, pair.tokenA.decimals)) * shareRatio);
-    setPooledTokenB(Number(ethers.utils.formatUnits(_reserveB, pair.tokenB.decimals)) * shareRatio);
+    setPooledTokenA(Number(ethers.formatUnits(_reserveA, pair.tokenA.decimals)) * shareRatio);
+    setPooledTokenB(Number(ethers.formatUnits(_reserveB, pair.tokenB.decimals)) * shareRatio);
   };
 
   useEffect(() => {
