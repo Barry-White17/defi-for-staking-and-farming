@@ -39,7 +39,7 @@ const Withdraw = () => {
     try {
       const stakingPool = new ethers.Contract(stakingPoolAddress, StakingPoolABI, library.getSigner());
       const userInfo = await stakingPool.userInfo(account);
-      setStakedAmount(ethers.utils.formatUnits(userInfo.amount, stakedToken.decimals));
+      setStakedAmount(ethers.formatUnits(userInfo.amount, stakedToken.decimals));
     } catch (error) {
       toast.error('Cannot get staked token amount!');
       console.error(error);
@@ -64,7 +64,7 @@ const Withdraw = () => {
     setLoading(true);
     try {
       const stakingPool = new ethers.Contract(stakingPoolAddress, StakingPoolABI, library.getSigner());
-      const tx = await stakingPool.withdraw(ethers.utils.parseUnits(toString(amount), stakedToken.decimals));
+      const tx = await stakingPool.withdraw(ethers.parseUnits(toString(amount), stakedToken.decimals));
       await tx.wait();
       toast.info(`Withdraw token successfully! Transaction hash: ${tx.hash}`);
       setAmount(0);
