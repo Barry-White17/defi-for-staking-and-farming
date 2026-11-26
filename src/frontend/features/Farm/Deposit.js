@@ -41,7 +41,7 @@ const Deposit = () => {
     try {
       const tokenContact = new ethers.Contract(stakedToken.address, ERC20ABI, library.getSigner());
       const _balance = await tokenContact.balanceOf(account);
-      setBalance(Number(ethers.utils.formatUnits(_balance, stakedToken.decimals)));
+      setBalance(Number(ethers.formatUnits(_balance, stakedToken.decimals)));
     } catch (error) {
       toast.error('Cannot get balance for staked token!');
       console.error(error);
@@ -53,7 +53,7 @@ const Deposit = () => {
     try {
       const tokenContract = new ethers.Contract(stakedToken.address, ERC20ABI, library.getSigner());
       let _allow = await tokenContract.allowance(account, farmingPoolAddress);
-      setAllow(Number(ethers.utils.formatUnits(_allow, stakedToken.decimals)));
+      setAllow(Number(ethers.formatUnits(_allow, stakedToken.decimals)));
     } catch (error) {
       toast.error('Cannot get allowance for staked token!');
       console.error(error);
@@ -74,7 +74,7 @@ const Deposit = () => {
     setLoading(true);
     try {
       const tokenContract = new ethers.Contract(stakedToken.address, ERC20ABI, library.getSigner());
-      const allowAmount = ethers.utils.parseUnits(toString(amount), stakedToken.decimals)
+      const allowAmount = ethers.parseUnits(toString(amount), stakedToken.decimals)
       const tx = await tokenContract.approve(farmingPoolAddress, allowAmount);
       await tx.wait();
       toast.info('Deposit is approved!');
