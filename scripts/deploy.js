@@ -18,7 +18,7 @@ async function main() {
     ["Bar Token", "BarToken"],
     ["Wrapped ETH", "WETH"],
     ["Pair Factory", "PairFactory"],
-    ["AMM Router", "AMMRouter"], // AMMRouter must come after PairFactory and WETH
+    // ["AMM Router", "AMMRouter"], // AMMRouter must come after PairFactory and WETH
     ["Staking Pool Manager", "StakingPoolManager"]
   ];
 
@@ -31,20 +31,20 @@ async function main() {
     let contract = factory === "AMMRouter" ?
       await contractFactory.deploy(pairFactoryAddress, wethAddress) :
       await contractFactory.deploy();
-    console.log(`${name} Contract Address:`, contract.address);
+    console.log(`${name} Contract Address:`, await contract.getAddress();
     if (factory === "PairFactory") {
-      pairFactoryAddress = contract.address;
+      pairFactoryAddress = await contract.getAddress();
     } else if (factory === "WETH") {
-      wethAddress = contract.address;
+      wethAddress = await contract.getAddress();
     }
-    saveContractToFrontend(contract, factory);
+    await saveContractToFrontend(contract, factory);
   }
 
   console.log("Deployer: ", deployer.address);
   console.log("Deployer ETH balance: ", (await deployer.getBalance()).toString());
 }
 
-function saveContractToFrontend(contract, name) {
+async function saveContractToFrontend(contract, name) {
   const contractsDir = __dirname + "/../src/frontend/contracts";
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
@@ -52,7 +52,7 @@ function saveContractToFrontend(contract, name) {
 
   fs.writeFileSync(
     contractsDir + `/${name}-address.json`,
-    JSON.stringify({ address: contract.address }, undefined, 2)
+    JSON.stringify({ address: await contract.getAddress() }, undefined, 2)
   );
 
   const contractArtifact = artifacts.readArtifactSync(name);
