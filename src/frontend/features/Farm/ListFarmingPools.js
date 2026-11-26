@@ -110,9 +110,9 @@ const ListFarmingPools = () => {
               <Grid container spacing={2}>
                 <Grid item>Stake: LP Token {`${item.tokenA.symbol}-${item.tokenB.symbol}`}</Grid>
                 <Grid item>Earn: {item.rewardToken.symbol}</Grid>
-                <Grid item>{item.rewardToken.symbol} Earned: {ethers.utils.formatUnits(item.pendingReward, item.rewardToken.decimals)}</Grid>
-                <Grid item>Total Staked: {ethers.utils.formatUnits(item.stakedTotal, item.stakedToken.decimals)}</Grid>
-                <Grid item>Reward Per Block: {ethers.utils.formatUnits(item.rewardPerBlock, item.rewardToken.decimals)}</Grid>
+                <Grid item>{item.rewardToken.symbol} Earned: {ethers.formatUnits(item.pendingReward, item.rewardToken.decimals)}</Grid>
+                <Grid item>Total Staked: {ethers.formatUnits(item.stakedTotal, item.stakedToken.decimals)}</Grid>
+                <Grid item>Reward Per Block: {ethers.formatUnits(item.rewardPerBlock, item.rewardToken.decimals)}</Grid>
                 <Grid item>{currentBlock >= item.rewardEndBlock ? "Expired" :
                   (currentBlock >= item.rewardStartBlock ? `Ends in ${item.rewardEndBlock - currentBlock} block(s)` :
                     `Starts in ${item.rewardStartBlock - currentBlock} block(s)`)}</Grid>
@@ -131,7 +131,7 @@ const ListFarmingPools = () => {
                 <Grid item md={3} xs={6}>
                   <Button sx={theme.component.primaryButton} fullWidth disabled={item.pendingReward.lte(0)} onClick={() => handleHarvest(item.address)}>
                     {loading ? <CircularProgress /> :
-                      `Harvest ${ethers.utils.formatUnits(item.pendingReward, item.rewardToken.decimals)} ${item.rewardToken.symbol}`}
+                      `Harvest ${ethers.formatUnits(item.pendingReward, item.rewardToken.decimals)} ${item.rewardToken.symbol}`}
                   </Button>
                 </Grid>
                 <Grid item md={3} xs={6}>
