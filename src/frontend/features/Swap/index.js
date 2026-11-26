@@ -284,7 +284,7 @@ const Swap = () => {
     for (let i = 0; i < path.length - 1; i++) {
       const [reserveA, reserveB,] = await ammRouter.getReserves(path[i], path[i + 1]);
       oldPrice = oldPrice * Number(ethers.formatUnits(reserveA, graph.get(path[i]).token.decimals))
-        / Number(ethers.utils.formatUnits(reserveB, graph.get(path[i + 1]).token.decimals));
+        / Number(ethers.formatUnits(reserveB, graph.get(path[i + 1]).token.decimals));
     }
     setPriceImpact(100 * (newPrice / oldPrice - 1));
   }
@@ -363,8 +363,8 @@ const Swap = () => {
     try {
       const contract = new ethers.Contract(WETH.address, WETHABI.abi, library.getSigner());
       const tx = await (swapMode === MODE_WRAP ?
-        contract.deposit({ value: ethers.utils.parseUnits(toString(amountA)) }) :
-        contract.withdraw(ethers.utils.parseUnits(toString(amountA))));
+        contract.deposit({ value: ethers.parseUnits(toString(amountA)) }) :
+        contract.withdraw(ethers.parseUnits(toString(amountA))));
       await tx.wait();
       toast.info(`${swapMode === MODE_WRAP ? "wrap" : "unwrap"} succeeded! Transaction Hash: ${tx.hash}`);
       setAmountA(0);
