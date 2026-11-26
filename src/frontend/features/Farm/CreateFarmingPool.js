@@ -63,7 +63,7 @@ const CreateFarmingPool = () => {
     try {
       const stakingPoolManager = new ethers.Contract(ManagerAddress.address, ManagerABI.abi, library.getSigner());
       const tx = await stakingPoolManager.createStakingPool(stakedToken.address, rewardToken.address,
-        ethers.utils.parseUnits(toString(rewardPerBlock), rewardToken.decimals), startBlock, endBlock);
+        ethers.parseUnits(toString(rewardPerBlock), rewardToken.decimals), startBlock, endBlock);
       await tx.wait();
       toast.info(`Staking pool is created successfully! Transaction Hash: ${tx.hash}`);
       setStakedToken({});
