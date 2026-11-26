@@ -41,7 +41,10 @@ async function main() {
   }
 
   console.log("Deployer: ", deployer.address);
-  console.log("Deployer ETH balance: ", (await deployer.getBalance()).toString());
+  console.log(
+    "Deployer ETH balance: ",
+    (await ethers.provider.getBalance(deployer.address)).toString(),
+  );
 }
 
 async function saveContractToFrontend(contract, name) {
